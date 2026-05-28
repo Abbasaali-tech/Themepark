@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>OOP Project Report - Theme Park Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            color: #1a1a1a;
+            background: white;
+        }
+
+        .page {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20mm 22mm 18mm 25mm;
+        }
+
+        .cover {
+            text-align: center;
+            min-height: 260mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px 0 20px;
+            page-break-after: always;
+        }
+
+        .cover-top {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .uni-logo {
+            width: 85px;
+            height: 85px;
+            background: #003580;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+        }
+
+        .uni-logo span {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            font-family: Arial;
+        }
+
+        .uni-name {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #003580;
+            line-height: 1.3;
+        }
+
+        .uni-sub {
+            font-size: 11pt;
+            color: #444;
+            margin-top: 4px;
+        }
+
+        .dept {
+            font-size: 11pt;
+            color: #444;
+            margin-top: 2px;
+        }
+
+        .divider-thick {
+            width: 100%;
+            height: 3px;
+            background: #003580;
+            margin: 14px 0 4px;
+        }
+
+        .divider-thin {
+            width: 100%;
+            height: 1px;
+            background: #003580;
+            margin: 4px 0 14px;
+        }
+
+        .doc-type {
+            font-size: 12pt;
+            color: #555;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: Arial;
+            margin-bottom: 10px;
+        }
+
+        .cover-title {
+            font-size: 24pt;
+            font-weight: bold;
+            color: #003580;
+            margin: 6px 0;
+            line-height: 1.25;
+        }
+
+        .cover-subtitle {
+            font-size: 12pt;
+            color: #555;
+            font-style: italic;
+            margin-top: 6px;
+        }
+
+        .cover-mid {
+            margin: 20px auto;
+            width: 85%;
+        }
+
+        .cover-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .cover-table td {
+            padding: 7px 14px;
+            font-size: 11pt;
+            border-bottom: 1px solid #dde3ef;
+        }
+
+        .cover-table td:first-child {
+            font-weight: bold;
+            color: #003580;
+            width: 42%;
+        }
+
+        .cover-bottom {
+            font-size: 10pt;
+            color: #666;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+
+        .toc-page {
+            page-break-after: always;
+        }
+
+        .toc-title {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #003580;
+            border-bottom: 2px solid #003580;
+            padding-bottom: 6px;
+            margin-bottom: 16px;
+        }
+
+        .toc-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 5px 0;
+            font-size: 11pt;
+            border-bottom: 1px dotted #bbb;
+        }
+
+        .toc-item.main {
+            font-weight: bold;
+            color: #003580;
+            margin-top: 8px;
+        }
+
+        .toc-item.sub {
+            padding-left: 20px;
+            color: #444;
+        }
+
+        h1 {
+            font-size: 14pt;
+            font-weight: bold;
+            color: #003580;
+            margin: 28px 0 10px;
+            border-bottom: 2px solid #003580;
+            padding-bottom: 5px;
+            page-break-after: avoid;
+        }
+
+        h2 {
+            font-size: 12.5pt;
+            font-weight: bold;
+            color: #1a3a6e;
+            margin: 18px 0 7px;
+        }
+
+        h3 {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #333;
+            margin: 12px 0 5px;
+        }
+
+        p {
+            line-height: 1.85;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+
+        ul,
+        ol {
+            margin: 6px 0 12px 24px;
+            line-height: 1.85;
+        }
+
+        li {
+            margin-bottom: 4px;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        table.std {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 11pt;
+        }
+
+        table.std th {
+            background: #003580;
+            color: white;
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        table.std td {
+            padding: 7px 12px;
+            border: 1px solid #c8d3e8;
+        }
+
+        table.std tr:nth-child(even) td {
+            background: #f0f4fc;
+        }
+
+        table.std .total td {
+            background: #003580;
+            color: white;
+            font-weight: bold;
+        }
+
+        .code-block {
+            background: #f4f6fb;
+            border: 1px solid #c8d3e8;
+            border-left: 4px solid #003580;
+            padding: 12px 14px;
+            font-family: 'Courier New', monospace;
+            font-size: 9.5pt;
+            line-height: 1.6;
+            margin: 10px 0;
+            border-radius: 0 4px 4px 0;
+            white-space: pre-wrap;
+        }
+
+        .note-box {
+            background: #f0f4fc;
+            border-left: 4px solid #003580;
+            padding: 10px 14px;
+            margin: 12px 0;
+            font-size: 11pt;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .diagram-box {
+            border: 2px dashed #003580;
+            border-radius: 6px;
+            padding: 20px;
+            text-align: center;
+            color: #003580;
+            margin: 14px 0;
+            font-size: 10.5pt;
+            background: #f8faff;
+            font-family: 'Courier New', monospace;
+            line-height: 1.9;
+        }
+
+        .screenshot {
+            border: 1px solid #c8d3e8;
+            border-radius: 6px;
+            padding: 35px;
+            text-align: center;
+            color: #888;
+            margin: 12px 0;
+            background: #fafafa;
+            font-size: 11pt;
+            font-style: italic;
+        }
+
+        .sign-block {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .sign-col {
+            text-align: center;
+            width: 40%;
+        }
+
+        .sign-line {
+            border-top: 1px solid #333;
+            padding-top: 6px;
+            margin-top: 45px;
+            font-size: 10pt;
+        }
+
+        .page-footer {
+            text-align: center;
+            font-size: 10pt;
+            color: #888;
+            margin-top: 30px;
+            border-top: 1px solid #ddd;
+            padding-top: 8px;
+        }
+
+        .pb {
+            page-break-before: always;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <div class="cover">
+            <div class="cover-top">
+                <div class="uni-logo"><span>NU</span></div>
+                <div class="uni-name">FAST National University of Computer<br>and Emerging Sciences</div>
+                <div class="uni-sub">Karachi Campus</div>
+                <div class="dept">Department of Computer Science</div>
+                <div class="divider-thick"></div>
+                <div class="divider-thin"></div>
+                <div class="doc-type">Final Project Report</div>
+                <div class="cover-title">Theme Park Management System</div>
+                <div class="cover-subtitle">An Object-Oriented C++ Application Implementing
+                    Inheritance,<br>Polymorphism, File Handling, Templates, and Exception Handling</div>
+            </div>
+            <div class="cover-mid">
+                <table class="cover-table">
+                    <tr>
+                        <td>Course:</td>
+                        <td>Object Oriented Programming (OOP)</td>
+                    </tr>
+                    <tr>
+                        <td>Instructor:</td>
+                        <td>Sir Muhammad Khalid Khan</td>
+                    </tr>
+                    <tr>
+                        <td>Section:</td>
+                        <td>BAI-2C</td>
+                    </tr>
+                    <tr>
+                        <td>Submission Date:</td>
+                        <td>April 2026</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="padding-top:10px; font-weight:bold; color:#003580;">Group Members</td>
+                    </tr>
+                    <tr>
+                        <td>Member 1:</td>
+                        <td>Mohammad Sarim Raza &nbsp;&nbsp; <strong>25K-0075</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Member 2:</td>
+                        <td>Abbas Ali Haider &nbsp;&nbsp; <strong>25K-0009</strong></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="cover-bottom">
+                FAST-NUCES Karachi &nbsp;|&nbsp; OOP Lab Project &nbsp;|&nbsp; Spring 2026
+            </div>
+        </div>
+
+        <div class="toc-page">
+            <div class="toc-title">Table of Contents</div>
+            <div class="toc-item main"><span>1. Executive Summary</span><span>3</span></div>
+            <div class="toc-item main"><span>2. Introduction</span><span>3</span></div>
+            <div class="toc-item sub"><span>2.1 Background &amp; Motivation</span><span>3</span></div>
+            <div class="toc-item sub"><span>2.2 Problem Statement</span><span>3</span></div>
+            <div class="toc-item sub"><span>2.3 Objectives</span><span>4</span></div>
+            <div class="toc-item sub"><span>2.4 Scope</span><span>4</span></div>
+            <div class="toc-item main"><span>3. System Analysis</span><span>4</span></div>
+            <div class="toc-item sub"><span>3.1 Functional Requirements</span><span>4</span></div>
+            <div class="toc-item sub"><span>3.2 Non-Functional Requirements</span><span>5</span></div>
+            <div class="toc-item main"><span>4. Object-Oriented Design</span><span>5</span></div>
+            <div class="toc-item sub"><span>4.1 Class Hierarchy &amp; UML Diagram</span><span>5</span></div>
+            <div class="toc-item sub"><span>4.2 Class Descriptions</span><span>6</span></div>
+            <div class="toc-item sub"><span>4.3 Relationships Between Classes</span><span>7</span></div>
+            <div class="toc-item main"><span>5. Implementation</span><span>7</span></div>
+            <div class="toc-item sub"><span>5.1 OOP Concepts Implemented</span><span>7</span></div>
+            <div class="toc-item sub"><span>5.2 Code Snippets</span><span>8</span></div>
+            <div class="toc-item sub"><span>5.3 File Structure</span><span>11</span></div>
+            <div class="toc-item main"><span>6. Testing &amp; Results</span><span>11</span></div>
+            <div class="toc-item main"><span>7. Challenges &amp; Solutions</span><span>12</span></div>
+            <div class="toc-item main"><span>8. Division of Work</span><span>12</span></div>
+            <div class="toc-item main"><span>9. Conclusion &amp; Future Work</span><span>13</span></div>
+            <div class="toc-item main"><span>10. References</span><span>13</span></div>
+        </div>
+
+        <div class="section pb">
+            <h1>1. Executive Summary</h1>
+            <p>This report presents the complete design and implementation of the <strong>Theme Park Management
+                    System</strong>, a C++ console application developed for the Object Oriented Programming (OOP) Lab
+                at FAST National University of Computer and Emerging Sciences, Karachi, under the supervision of Sir
+                Muhammad Khalid Khan.</p>
+            <p>The system models a real-world theme park using a rich class hierarchy. It demonstrates all fundamental
+                and advanced OOP concepts including encapsulation, inheritance, polymorphism, abstract classes, operator
+                overloading, templates, exception handling, and file I/O. The project was developed by two members,
+                Mohammad Sarim Raza (25K-0075) and Abbas Ali Haider (25K-0009). The final application allows staff to
+                register visitors and book tickets, while the manager can add rides, events, staff, inventory, view
+                feedback, and generate revenue reports — all persisted to files across sessions.</p>
+        </div>
+
+        <div class="section">
+            <h1>2. Introduction</h1>
+
+            <h2>2.1 Background &amp; Motivation</h2>
+            <p>Theme parks involve many daily operations such as visitor registration, ride management, event
+                scheduling, ticket booking, staff management, feedback collection, inventory control, and revenue
+                tracking. Handling these operations manually can lead to data inconsistency, poor record keeping, and
+                difficulty in managing the park efficiently. This project was created to model these operations using
+                Object Oriented Programming concepts in C++.</p>
+            <p>This project also serves as a practical exercise in applying all OOP concepts studied during the semester
+                in a single application.</p>
+
+            <h2>2.2 Problem Statement</h2>
+            <p>The core problems addressed by this project are:</p>
+            <ul>
+                <li>No automated way to track visitors, rides, events, and tickets.</li>
+                <li>Manual management of staff, inventory, and feedback records.</li>
+                <li>Revenue calculation is difficult without a structured software system.</li>
+                <li>Data is lost between sessions without persistent storage.</li>
+                <li>Operations need role-based access so staff and manager can do different tasks.</li>
+            </ul>
+
+            <h2>2.3 Objectives</h2>
+            <ol>
+                <li>Design a well-structured class hierarchy using inheritance and polymorphism.</li>
+                <li>Implement all core OOP concepts: encapsulation, inheritance, polymorphism, abstraction, operator
+                    overloading, templates, and exception handling.</li>
+                <li>Persist all data using C++ file handling (fstream).</li>
+                <li>Provide a clean, menu-driven interface for staff and manager operations.</li>
+                <li>Implement login-based access for two roles with one staff user and one manager user.</li>
+            </ol>
+
+            <h2>2.4 Scope</h2>
+            <ul>
+                <li><strong>In Scope:</strong> Visitor management, ride management, event management, ticket booking,
+                    staff records, feedback, inventory, revenue report, file persistence.</li>
+                <li><strong>Out of Scope:</strong> GUI interface, database connectivity, online booking, mobile app
+                    integration.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h1>3. System Analysis</h1>
+
+            <h2>3.1 Functional Requirements</h2>
+            <table class="std">
+                <tr>
+                    <th>ID</th>
+                    <th>Requirement</th>
+                    <th>Priority</th>
+                </tr>
+                <tr>
+                    <td>FR-01</td>
+                    <td>Staff can register new visitors with unique ID.</td>
+                    <td>High</td>
+                </tr>
+                <tr>
+                    <td>FR-02</td>
+                    <td>Staff can view rides and events available in the park.</td>
+                    <td>High</td>
+                </tr>
+                <tr>
+                    <td>FR-03</td>
+                    <td>Staff can book tickets for visitors.</td>
+                    <td>High</td>
+                </tr>
+                <tr>
+                    <td>FR-04</td>
+                    <td>Manager can add staff, rides, events, and inventory items.</td>
+                    <td>High</td>
+                </tr>
+                <tr>
+                    <td>FR-05</td>
+                    <td>Manager can view feedback and revenue reports.</td>
+                    <td>High</td>
+                </tr>
+                <tr>
+                    <td>FR-06</td>
+                    <td>System saves and loads all data from files automatically.</td>
+                    <td>High</td>
+                </tr>
+                <tr>
+                    <td>FR-07</td>
+                    <td>System supports role-based login for staff and manager.</td>
+                    <td>High</td>
+                </tr>
+                <tr>
+                    <td>FR-08</td>
+                    <td>System displays all records in formatted console output.</td>
+                    <td>Medium</td>
+                </tr>
+                <tr>
+                    <td>FR-09</td>
+                    <td>System calculates total revenue based on ticket sales.</td>
+                    <td>Medium</td>
+                </tr>
+                <tr>
+                    <td>FR-10</td>
+                    <td>System handles invalid input and missing records using exceptions.</td>
+                    <td>High</td>
+                </tr>
+            </table>
+
+            <h2>3.2 Non-Functional Requirements</h2>
+            <ul>
+                <li><strong>Code Quality:</strong> Classes must be clear and easy to understand.</li>
+                <li><strong>Robustness:</strong> Invalid inputs must be handled safely.</li>
+                <li><strong>Maintainability:</strong> The code should be structured in a readable manner.</li>
+                <li><strong>Portability:</strong> Must compile with g++ on Windows.</li>
+                <li><strong>Persistence:</strong> Data should remain available after the program closes.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h1>4. Object-Oriented Design</h1>
+
+            <h2>4.1 Class Hierarchy &amp; UML Diagram</h2>
+            <p>The application is built around the following class hierarchy:</p>
+
+            <div class="diagram-box">
+                &lt;&lt;abstract&gt;&gt;
+                ParkEntity
+                / | | | \
+                / | | | \
+                Visitor Ride Event Staff Inventory
+
+                Ticket -- operator overloading / friend functions
+                Feedback -- aggregation / average rating
+                User -- authentication and roles
+                ThemeParkSystem -- main controller class
+            </div>
+
+            <h2>4.2 Class Descriptions</h2>
+
+            <h3>ParkEntity (Abstract Base Class)</h3>
+            <p>Abstract base class representing any park entity. Contains protected attributes: ID and name. Declares
+                pure virtual methods <code>display()</code> and <code>serialize()</code> so every derived class provides
+                its own implementation.</p>
+
+            <h3>Visitor (Derived from ParkEntity)</h3>
+            <p>Represents a park visitor. Adds age and email attributes and uses a static ID counter for automatic ID
+                generation.</p>
+
+            <h3>Ride (Derived from ParkEntity)</h3>
+            <p>Represents a ride in the park. Stores price and operational status, and allows the system to show whether
+                the ride is available or under maintenance.</p>
+
+            <h3>Event (Derived from ParkEntity)</h3>
+            <p>Represents a park event such as Eid Festival, Bake Sale, Chand Raat, Basant Kite Festival, and Holi Color
+                Festival. Stores date, capacity, and number of registered visitors.</p>
+
+            <h3>Staff (Derived from ParkEntity)</h3>
+            <p>Represents staff members working in the park. Stores role and salary information.</p>
+
+            <h3>Inventory (Derived from ParkEntity)</h3>
+            <p>Represents park inventory items such as popcorn, ice cream, soft drinks, cotton candy, and merchandise.
+            </p>
+
+            <h3>Ticket</h3>
+            <p>Stores ticket booking information and supports discount logic and output formatting.</p>
+
+            <h3>Feedback</h3>
+            <p>Stores visitor feedback and rating, and supports average rating calculation through a friend function.
+            </p>
+
+            <h3>User</h3>
+            <p>Handles login credentials and role-based authentication for staff and manager users.</p>
+
+            <h3>ThemeParkSystem</h3>
+            <p>The main controller class that handles menus, login, file loading, file saving, and all operations of the
+                application.</p>
+
+            <h2>4.3 Relationships Between Classes</h2>
+            <table class="std">
+                <tr>
+                    <th>Relationship</th>
+                    <th>Classes Involved</th>
+                    <th>Type</th>
+                </tr>
+                <tr>
+                    <td>ParkEntity is the base of other park entities</td>
+                    <td>ParkEntity, Visitor, Ride, Event, Staff, Inventory</td>
+                    <td>Inheritance</td>
+                </tr>
+                <tr>
+                    <td>ThemeParkSystem manages collections of objects</td>
+                    <td>ThemeParkSystem, Visitor, Ride, Event, Staff, Inventory, Ticket, Feedback, User</td>
+                    <td>Aggregation</td>
+                </tr>
+                <tr>
+                    <td>Ticket uses friend function and operator overloading</td>
+                    <td>Ticket, applyDiscount, operator&lt;&lt;</td>
+                    <td>Association</td>
+                </tr>
+                <tr>
+                    <td>Feedback uses friend function for average rating</td>
+                    <td>Feedback, calculateAverageRating</td>
+                    <td>Association</td>
+                </tr>
+                <tr>
+                    <td>User controls login access</td>
+                    <td>User, ThemeParkSystem</td>
+                    <td>Dependency</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h1>5. Implementation</h1>
+
+            <h2>5.1 OOP Concepts Implemented</h2>
+            <table class="std">
+                <tr>
+                    <th>OOP Concept</th>
+                    <th>Implementation Detail</th>
+                </tr>
+                <tr>
+                    <td>Encapsulation</td>
+                    <td>All important data members are private and accessed through public methods.</td>
+                </tr>
+                <tr>
+                    <td>Abstraction</td>
+                    <td>ParkEntity provides an abstract interface for all park records.</td>
+                </tr>
+                <tr>
+                    <td>Inheritance</td>
+                    <td>Visitor, Ride, Event, Staff, and Inventory inherit from ParkEntity.</td>
+                </tr>
+                <tr>
+                    <td>Polymorphism</td>
+                    <td>Virtual display() and serialize() functions are overridden in derived classes.</td>
+                </tr>
+                <tr>
+                    <td>Abstract Classes</td>
+                    <td>ParkEntity cannot be instantiated directly because it has pure virtual functions.</td>
+                </tr>
+                <tr>
+                    <td>Operator Overloading</td>
+                    <td>Ticket class overloads +, &lt;, and &lt;&lt; operators.</td>
+                </tr>
+                <tr>
+                    <td>Templates</td>
+                    <td>readNumber() and findById() are template functions.</td>
+                </tr>
+                <tr>
+                    <td>Exception Handling</td>
+                    <td>runtime_error and invalid_argument are used for invalid operations.</td>
+                </tr>
+                <tr>
+                    <td>File Handling</td>
+                    <td>All data is saved and loaded from text files.</td>
+                </tr>
+                <tr>
+                    <td>STL Usage</td>
+                    <td>vector, algorithm, numeric, and stringstream are used.</td>
+                </tr>
+                <tr>
+                    <td>Friend Functions</td>
+                    <td>applyDiscount() and calculateAverageRating() access private data when needed.</td>
+                </tr>
+                <tr>
+                    <td>Static Members</td>
+                    <td>Static nextId values generate unique IDs for each class.</td>
+                </tr>
+            </table>
+
+            <h2>5.2 Code Snippets</h2>
+
+            <h3>Abstract Base Class: ParkEntity</h3>
+            <div class="code-block">class ParkEntity
+                {
+                protected:
+                int id;
+                string name;
+
+                public:
+                ParkEntity(int id, const string &name) : id(id), name(name) {}
+                virtual ~ParkEntity() {}
+
+                int getId() const { return id; }
+                string getName() const { return name; }
+
+                virtual void display() const = 0;
+                virtual string serialize() const = 0;
+                };</div>
+
+            <h3>Inheritance &amp; Polymorphism: Visitor and Ride</h3>
+            <div class="code-block">class Visitor : public ParkEntity
+                {
+                private:
+                int age;
+                string email;
+                static int nextId;
+
+                public:
+                Visitor(const string &name, int age, const string &email)
+                : ParkEntity(nextId++, name), age(age), email(email) {}
+
+                void display() const override
+                {
+                cout << "Visitor ID: " << id << " | Name: " << name << " | Age: " << age << " | Email: " << email
+                    << "\n" ; } }; class Ride : public ParkEntity { private: double price; bool operational; public:
+                    void display() const override { cout << "Ride ID: " << id << " | Name: " << name << " | Price: $" <<
+                    fixed << setprecision(2) << price << " | Status: " << (operational ? "Operational" : "Maintenance" )
+                    << "\n" ; } };</div>
+
+                    <h3>Operator Overloading: Ticket</h3>
+                    <div class="code-block">class Ticket
+                        {
+                        private:
+                        int id;
+                        int visitorId;
+                        int rideId;
+                        double amount;
+
+                        public:
+                        double operator+(const Ticket &other) const { return amount + other.amount; }
+                        bool operator<(const Ticket &other) const { return amount < other.amount; } friend void
+                            applyDiscount(Ticket &ticket, double percentage); friend ostream &operator<<(ostream &os,
+                            const Ticket &ticket); };</div>
+
+                            <h3>File Handling</h3>
+                            <div class="code-block">void saveUsers() const
+                                {
+                                ofstream uFile(usersFile);
+                                for (const auto &u : users)
+                                uFile &lt;&lt; u.serialize() &lt;&lt; "\n";
+                                }
+
+                                void loadUsers()
+                                {
+                                ifstream file(usersFile);
+                                string line;
+                                while (getline(file, line))
+                                {
+                                stringstream ss(line);
+                                string userIdStr, username, password, role;
+                                getline(ss, userIdStr, '|');
+                                getline(ss, username, '|');
+                                getline(ss, password, '|');
+                                getline(ss, role, '|');
+                                users.emplace_back(stoi(userIdStr), username, password, role);
+                                }
+                                }</div>
+
+                            <h2>5.3 File Structure</h2>
+                            <table class="std">
+                                <tr>
+                                    <th>File</th>
+                                    <th>Purpose</th>
+                                </tr>
+                                <tr>
+                                    <td>ThemeParkProject.cpp</td>
+                                    <td>Main source file with full system implementation</td>
+                                </tr>
+                                <tr>
+                                    <td>Visitors.txt</td>
+                                    <td>Visitor records</td>
+                                </tr>
+                                <tr>
+                                    <td>Rides.txt</td>
+                                    <td>Ride records</td>
+                                </tr>
+                                <tr>
+                                    <td>Tickets.txt</td>
+                                    <td>Ticket records</td>
+                                </tr>
+                                <tr>
+                                    <td>Events.txt</td>
+                                    <td>Event records</td>
+                                </tr>
+                                <tr>
+                                    <td>Staff.txt</td>
+                                    <td>Staff records</td>
+                                </tr>
+                                <tr>
+                                    <td>Feedback.txt</td>
+                                    <td>Feedback records</td>
+                                </tr>
+                                <tr>
+                                    <td>Inventory.txt</td>
+                                    <td>Inventory records</td>
+                                </tr>
+                                <tr>
+                                    <td>Users.txt</td>
+                                    <td>Login credentials</td>
+                                </tr>
+                            </table>
+                    </div>
+
+                    <div class="section">
+                        <h1>6. Testing &amp; Results</h1>
+
+                        <h2>6.1 Functional Test Cases</h2>
+                        <table class="std">
+                            <tr>
+                                <th>Test Case</th>
+                                <th>Input / Action</th>
+                                <th>Expected Result</th>
+                                <th>Status</th>
+                            </tr>
+                            <tr>
+                                <td>Login as Staff</td>
+                                <td>staff1 / pass123</td>
+                                <td>Staff portal opens</td>
+                                <td>Pass</td>
+                            </tr>
+                            <tr>
+                                <td>Login as Manager</td>
+                                <td>manager1 / admin123</td>
+                                <td>Manager portal opens</td>
+                                <td>Pass</td>
+                            </tr>
+                            <tr>
+                                <td>Register Visitor</td>
+                                <td>Valid name, age, email</td>
+                                <td>Visitor added and saved</td>
+                                <td>Pass</td>
+                            </tr>
+                            <tr>
+                                <td>Book Ticket</td>
+                                <td>Valid visitor ID and ride ID</td>
+                                <td>Ticket booked successfully</td>
+                                <td>Pass</td>
+                            </tr>
+                            <tr>
+                                <td>Add Event</td>
+                                <td>Event name, date, capacity</td>
+                                <td>Event added and saved</td>
+                                <td>Pass</td>
+                            </tr>
+                            <tr>
+                                <td>Add Staff</td>
+                                <td>Name, role, salary</td>
+                                <td>Staff added and saved</td>
+                                <td>Pass</td>
+                            </tr>
+                            <tr>
+                                <td>View Feedback</td>
+                                <td>Open manager feedback menu</td>
+                                <td>All feedback displayed with average rating</td>
+                                <td>Pass</td>
+                            </tr>
+                            <tr>
+                                <td>Revenue Report</td>
+                                <td>Open revenue report menu</td>
+                                <td>Total ticket revenue displayed</td>
+                                <td>Pass</td>
+                            </tr>
+                            <tr>
+                                <td>File Persistence</td>
+                                <td>Close and reopen program</td>
+                                <td>Data reloaded from files</td>
+                                <td>Pass</td>
+                            </tr>
+                        </table>
+
+                        <h2>6.2 Sample Console Output</h2>
+                        <div class="screenshot">
+                            <img src="main_menu.png" alt="Main Menu - Theme Park Management System" style="max-width: 100%; border-radius: 4px;">
+                        </div>
+                        <div class="screenshot">
+                            <img src="staff_portal.png" alt="Staff Portal - Register Visitor" style="max-width: 100%; border-radius: 4px;">
+                        </div>
+                        <div class="screenshot">
+                            <img src="manager_portal.png" alt="Manager Portal - Add Ride / Add Event" style="max-width: 100%; border-radius: 4px;">
+                        </div>
+                        <div class="screenshot">
+                            <img src="revenue_report.png" alt="Revenue Report" style="max-width: 100%; border-radius: 4px;">
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h1>7. Challenges &amp; Solutions</h1>
+                        <table class="std">
+                            <tr>
+                                <th>Challenge</th>
+                                <th>Solution Applied</th>
+                            </tr>
+                            <tr>
+                                <td>Managing multiple record types in one program</td>
+                                <td>Used separate classes and separate vectors for each entity type.</td>
+                            </tr>
+                            <tr>
+                                <td>Keeping file data persistent</td>
+                                <td>Added saveData() and loadData() functions with text files.</td>
+                            </tr>
+                            <tr>
+                                <td>Handling invalid user input</td>
+                                <td>Implemented readNumber() template and exception handling.</td>
+                            </tr>
+                            <tr>
+                                <td>Role-based access control</td>
+                                <td>Created User class with role checking for Staff and Manager.</td>
+                            </tr>
+                            <tr>
+                                <td>Keeping code organized</td>
+                                <td>Separated logic into clear classes and methods.</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="section">
+                        <h1>8. Division of Work</h1>
+                        <table class="std">
+                            <tr>
+                                <th>Member</th>
+                                <th>Roll No.</th>
+                                <th>Modules / Tasks</th>
+                                <th>Contribution</th>
+                            </tr>
+                            <tr>
+                                <td>Mohammad Sarim Raza</td>
+                                <td>25K-0075</td>
+                                <td>Class hierarchy design, visitor/ride/event modules, polymorphism, report formatting
+                                </td>
+                                <td>50%</td>
+                            </tr>
+                            <tr>
+                                <td>Abbas Ali Haider</td>
+                                <td>25K-0009</td>
+                                <td>File handling, login system, ticket booking, feedback, inventory, testing</td>
+                                <td>50%</td>
+                            </tr>
+                        </table>
+                        <div class="note-box"><strong>Note:</strong> Both members understand the complete codebase and
+                            can explain any part of the project during the viva evaluation.</div>
+                    </div>
+
+                    <div class="section">
+                        <h1>9. Conclusion &amp; Future Work</h1>
+
+                        <h2>9.1 Conclusion</h2>
+                        <p>The Theme Park Management System successfully demonstrates all OOP concepts studied in the
+                            course within a single application. The class hierarchy clearly models the theme park domain
+                            with proper use of abstraction, encapsulation, inheritance, and polymorphism. The use of
+                            templates, custom exceptions, file handling, STL containers, operator overloading, and
+                            static members further reflects a complete application of C++ OOP features.</p>
+                        <p>The project gave both team members practical experience with class design, pointer-based
+                            polymorphism, file handling, and multi-class system development.</p>
+
+                        <h2>9.2 Future Work</h2>
+                        <ul>
+                            <li>Add delete and edit options for visitors, rides, events, and staff.</li>
+                            <li>Add search functionality for records.</li>
+                            <li>Add graphical user interface.</li>
+                            <li>Add more detailed reporting features.</li>
+                            <li>Add online ticket booking support.</li>
+                        </ul>
+                    </div>
+
+                    <div class="section">
+                        <h1>10. References</h1>
+                        <ol>
+                            <li>C++ Programming Language Documentation</li>
+                            <li>Object Oriented Programming course notes</li>
+                            <li>STL and file handling references</li>
+                        </ol>
+                    </div>
+
+                    <div class="sign-block">
+                        <div class="sign-col">
+                            <div class="sign-line">Group Signature<br><span style="color:#888"></span></div>
+                        </div>
+                        <div class="sign-col">
+                            <div class="sign-line">Instructor Approval<br><span style="color:#888">Sir Muhammad Khalid
+                                    Khan</span></div>
+                        </div>
+                    </div>
+
+                    <div class="page-footer">
+                        FAST National University of Computer and Emerging Sciences, Karachi &nbsp;|&nbsp; OOP Lab
+                        Project &nbsp;|&nbsp; Spring 2026
+                    </div>
+
+            </div>
+</body>
+
+</html>
