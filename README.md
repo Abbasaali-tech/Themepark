@@ -91,10 +91,10 @@ ThemeParkProject.exe
 
 | Screen | Preview |
 | --- | --- |
-| Main Menu | ![Main Menu](main_menu.png) |
-| Staff Portal | ![Staff Portal](staff_portal.png) |
-| Manager Portal | ![Manager Portal](manager_portal.png) |
-| Revenue Report | ![Revenue Report](revenue_report.png) |
+| Main Menu | ![Main Menu](/images/main_menu.png) |
+| Staff Portal | ![Staff Portal](/images/staff_portal.png) |
+| Manager Portal | ![Manager Portal](/images/manager_portal.png) |
+| Revenue Report | ![Revenue Report](/images/revenue_report.png) |
 
 ## Notes
 
